@@ -1,0 +1,121 @@
+pragma solidity  >=0.8.0;
+
+contract Restaurant{
+
+    struct Dish{
+        string name_good;
+        uint cost_good;
+    }
+
+    struct Order{
+        Dish[] dishes;
+        uint table;
+        uint cost_order ;
+        uint time_create_order;
+        string is_ready;
+        address visitor;
+    }
+
+    address public admin;
+    Dish[] Dishes;
+    Order[] Orders;
+    bool[6] is_free_table =[true,true,true,true,true,true];
+    string[3] status_order=["Start order", "Waiting order","Closed order"];
+
+    constructor() public{
+        admin = payable(msg.sender;
+        Dishes.push(Dish("fish", 10));
+        Dishes.push(Dish("frog", 25));
+    }
+
+    modifier OnlyAdmin{
+        require(admin == msg.sender,"Not admin");
+        _;
+    }
+    //
+    function get_tables() public view returns(bool[6] memory){
+        return is_free_table;
+    }
+
+    //просмотр заказа
+    function get_order(uint number_order) public view returns(Order memory){
+        return Orders[number_order];
+    }
+
+    //показать все заказы
+    function get_orders() public view returns (Order[] memory){
+        return Orders;
+    }
+    
+    //посмотреть меню
+    function get_dishes() public view returns(Dish[] memory){
+        return Dishes;
+    }
+    //discount
+    function discount_cost(uint256 cost) private pure returns (uint) {
+        if(cost > 500)
+            return cost * 85/100;
+        else if(cost > 200) 
+            return cost * 90/100;
+        else if(cost > 100)
+            return cost * 95/100;
+        else return cost;
+    }
+
+    //добавить блюдо в меню
+    function add_dish_menu(string memory name_dish, uint cost_dish) public {
+        Dishes.push(Dish(name_dish,cost_dish));
+    }
+    //change dish
+    function change_dish_menu(string memory name_dish, uint cost_dish, uint id_dish) public {
+        Dishes[id_dish] = Dish(name_dish, cost_dish); 
+    }
+
+    //начало добавления заказа
+    function start_order(address _visitor, uint _num_table) public {
+        Orders.push();
+        Orders[Orders.length -1].is_ready =status_order[0];
+        Orders[Orders.length -1].visitor =_visitor;
+        Orders[Orders.length -1].table = _num_table;
+        is_free_table[_num_table-1] = false;
+    }
+
+    //добавить блюдо в заказ
+    function add_dish_in_order(uint number_order, uint number_dish) public {
+        Orders[number_order].dishes.push(Dishes[number_dish]);
+        Orders[number_order].cost_order +=Dishes[number_dish].cost_good;
+    }
+
+    //убрать блюдо
+    function delete_dish_in_order(uint number_order, uint number_dish) public {
+        Orders[number_order].cost_order -=Dishes[number_dish].cost_good;
+        delete Orders[number_order].dishes[number_dish];
+    }
+
+    //получить заказ
+    function got_order(uint number_order) public{
+        Orders[number_order].is_ready = status_order[1];
+        Orders[number_order].time_create_order = block.timestamp;
+    }
+
+    //статус закрытия счета
+    function closed_offer(uint number_order) public {
+        Orders[number_order].is_ready = status_order[2];
+        Orders[number_order].cost_order = discount_cost(Orders[number_order].cost_order);
+    }
+
+    //оплата за услуги
+    function paying(uint number_order) public payable{
+        //closed_offer(number_order);
+        payable(admin).transfer(msg.value);
+        table_free(Orders[number_order].table);
+    }
+
+    //статус столика доступный
+    function table_free(uint number_table) public {
+        require(number_table <= 6,"Table is not find");
+        require(number_table !=0, "Table is can not be 'zero'");
+        is_free_table[number_table-1] = true;
+    }
+
+}

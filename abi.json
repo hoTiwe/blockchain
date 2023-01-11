@@ -1,0 +1,538 @@
+[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amountGood",
+				"type": "uint256"
+			}
+		],
+		"name": "add_amount_of_good",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_nameFirmBuy",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_addressFirmBuy",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_phoneNumberBuy",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "owner_buyer",
+				"type": "address"
+			}
+		],
+		"name": "add_buyer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_idBuyer",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amountSellGoods",
+				"type": "uint256"
+			}
+		],
+		"name": "add_deals",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_idGood",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_nameFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_nameGoods",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_units",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_valueBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_valueSell",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "_isSalling",
+				"type": "bool"
+			}
+		],
+		"name": "add_good",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_idGood",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_nameFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_addressFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_phoneNumber",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "owner_provider",
+				"type": "address"
+			}
+		],
+		"name": "add_provider",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "admin",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_removeGood",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_idBuyer",
+				"type": "address"
+			}
+		],
+		"name": "buy_good",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "buyers",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "adr",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "nameFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "addressFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_nameGoods",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_units",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_valueBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_valueSell",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "_isSalling",
+				"type": "bool"
+			}
+		],
+		"name": "change_good",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "deals",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "idBuyer",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "idSeller",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amountSellGoods",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "get_deal_num",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "i",
+				"type": "uint256"
+			}
+		],
+		"name": "get_goods",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "nameFirm",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "nameGoods",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "units",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "valueBuy",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "valueSell",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isSalling",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct OptStore.Good",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "get_goods_num",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "i",
+				"type": "uint256"
+			}
+		],
+		"name": "get_provider",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "adr",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "nameFirm",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "addressFirm",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "phoneNumber",
+						"type": "string"
+					}
+				],
+				"internalType": "struct OptStore.User",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "goods",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "nameFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "nameGoods",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "units",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "valueBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "valueSell",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isSalling",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "providers",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "adr",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "nameFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "addressFirm",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "phoneNumber",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_removeGood",
+				"type": "uint256"
+			}
+		],
+		"name": "remove_amount_of_good",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]

@@ -1,0 +1,123 @@
+pragma solidity 0.8.0;
+
+
+contract OptStore{
+    
+    struct User {
+        address adr;
+        string nameFirm;
+        string addressFirm;
+        string phoneNumber;
+    }
+
+    struct Good{
+        uint id;
+        string nameFirm;
+        string nameGoods;
+        string units;
+        uint amount;
+        uint valueBuy;
+        uint valueSell;
+        bool isSalling;
+    }
+
+    struct makeDeal{
+        string idBuyer;
+        string idSeller;
+        uint id;
+        uint amountSellGoods;
+    }
+
+    mapping(uint => User) public providers;
+    mapping(address => User) public buyers;
+    mapping(uint => Good) public goods;
+    mapping(uint =>makeDeal) public deals;
+    uint amount_deals =0;
+    uint amount_goods =0;
+    address public admin;
+    constructor() public {
+        admin = msg.sender;
+    }
+
+    modifier OnlyAdmin{
+        require(msg.sender == admin, "Not Admin");
+        _;
+    }
+
+    function get_deal_num() public view returns(uint){
+        return amount_deals;
+    }
+
+    function get_goods_num() public view returns(uint){
+        return amount_goods;
+    }
+
+    function get_goods(uint i) public view returns(Good memory) {
+        return goods[i];
+    }
+
+    function get_provider(uint i) public view returns(User memory) {
+        return providers[i];
+    }
+
+    // Добавление товара (добавляются один за другим, имеют свой id, нужный для поиска
+    // поставщика по этому id)
+    function add_good(uint _idGood, string memory _nameFirm, string memory _nameGoods, string memory _units, uint _amount, uint _valueBuy, uint _valueSell, bool _isSalling) public OnlyAdmin {
+        goods[amount_goods] = (Good(_idGood, _nameFirm, _nameGoods, _units, _amount, _valueBuy, _valueSell,_isSalling));
+        amount_goods++;
+    }
+
+    // Добавление провайдера (добавляется по уникальному номеру товара)
+    function add_provider(uint _idGood, string memory _nameFirm, string memory _addressFirm, string memory _phoneNumber, address owner_provider) public OnlyAdmin{
+        require(owner_provider != address(0), "Wrong address");
+        require(providers[goods[_idGood].id].adr == address(0), "Id has been already used");
+        require(goods[_idGood].id !=0, "Good is not exist");
+        providers[goods[_idGood].id] = User(owner_provider, _nameFirm, _addressFirm, _phoneNumber);
+        goods[_idGood].nameFirm = _nameFirm; 
+    }
+
+    // Добавление покупателя (добавляются следом)
+    function add_buyer( string memory _nameFirmBuy, string memory _addressFirmBuy, string memory _phoneNumberBuy,address owner_buyer ) public {
+        require(owner_buyer != address(0), "Wrong address");
+        require(buyers[owner_buyer].adr == address(0), "Id has been already used");
+        buyers[owner_buyer] = User(owner_buyer, _nameFirmBuy, _addressFirmBuy,_phoneNumberBuy);
+    }
+    // Функция изменения значений товара
+    function change_good(uint _id,string memory _nameGoods, string memory _units, uint _amount, uint _valueBuy, uint _valueSell, bool _isSalling ) public OnlyAdmin {
+        require(_id < amount_goods, "Goods is not exist");
+        if(keccak256(abi.encodePacked(_nameGoods)) != keccak256(abi.encodePacked("-"))) {
+            goods[_id].nameGoods = _nameGoods;
+        }
+        if(keccak256(abi.encodePacked(_units)) != keccak256(abi.encodePacked("-"))) {
+            goods[_id].units = _units;
+        }
+        goods[_id].amount = _amount;
+        goods[_id].valueBuy = _valueBuy;
+        goods[_id].valueSell = _valueSell;
+        goods[_id].isSalling = _isSalling;
+    }
+
+    function add_amount_of_good(uint _id, uint _amountGood) public {
+        goods[_id].amount += _amountGood;
+    }
+
+    function remove_amount_of_good(uint _id, uint _removeGood) public {
+        goods[_id].amount -= _removeGood;
+    }
+
+    function add_deals(uint _id, address _idBuyer, uint _amountSellGoods) public OnlyAdmin {
+        deals[amount_deals] = makeDeal(buyers[_idBuyer].nameFirm, providers[goods[_id].id].nameFirm, goods[_id].id, _amountSellGoods);
+        amount_deals++;
+    }
+    // Покупка товара фирмой
+    function buy_good(uint _id, uint _removeGood, address _idBuyer) public payable {
+        require(goods[_id].amount >= _removeGood, "Goods are not enough");
+        require(msg.value == goods[_id].valueSell*_removeGood , "Wrong amount of miney");
+        require(goods[_id].isSalling == true, "This good is not salling");
+        require(buyers[_idBuyer].adr != address(0), "Wrong address buyer");
+        remove_amount_of_good(_id, _removeGood);
+        payable(admin).transfer(msg.value);
+        add_deals(_id, _idBuyer, _removeGood);
+    }
+
+}
